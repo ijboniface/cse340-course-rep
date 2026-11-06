@@ -4,6 +4,8 @@ import ejs from 'ejs';
 import { fileURLToPath } from 'url';
 import path from 'path';
 
+import { getAllOrganizations } from './src/models/organizations.js';
+
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
 const PORT = Number(process.env.PORT) || 3000;
 
@@ -30,7 +32,8 @@ app.get('/', async (req, res) => {
 
 app.get('/organizations', async (req, res) => {
     const title = 'Our Partner Organizations';
-    res.render('organizations', { title });
+    const organizations = await getAllOrganizations();
+    res.render('organizations', { title, organizations });
 });
 
 app.get('/projects', async (req, res) => {
