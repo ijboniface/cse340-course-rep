@@ -3,11 +3,9 @@
     --accent: #985337;
     --accent-hover: #7D422B;
     --accent-light: #F3EAE5;
-
     --background: #F8F7F2;
     --surface: #FFFFFF;
     --surface-warm: #F1F0EA;
-
     --text: #303A36;
     --muted: #626D66;
     --border: #E3E6E1;
@@ -40,8 +38,8 @@ nav {
 
 nav ul {
     max-width: 1200px;
-    margin: 0 auto;
     min-height: 72px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     gap: 35px;
@@ -49,13 +47,14 @@ nav ul {
 }
 
 nav a {
+    position: relative;
+    display: inline-block;
+    padding: 24px 0;
     color: var(--surface);
     text-decoration: none;
     font-size: 15px;
     font-weight: 600;
-    display: inline-block;
-    padding: 24px 0;
-    transition: color 0.2s ease;
+    transition: color 0.3s ease;
 }
 
 nav a:hover,
@@ -63,11 +62,30 @@ nav a:focus {
     color: #D9C8B8;
 }
 
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 17px;
+    width: 100%;
+    height: 2px;
+    background: #D9C8B8;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+nav a:hover::after,
+nav a:focus-visible::after {
+    transform: scaleX(1);
+}
+
 main {
     width: 86%;
     max-width: 1100px;
     margin: 65px auto;
     flex: 1;
+    animation: pageEntrance 0.7s ease-out both;
 }
 
 main>h1 {
@@ -91,6 +109,11 @@ main>p {
     margin-bottom: 25px;
 }
 
+main>h1,
+.projects-intro h1 {
+    animation: headingEntrance 0.8s ease-out both;
+}
+
 .main-logo {
     display: block;
     width: 100%;
@@ -98,6 +121,7 @@ main>p {
     height: auto;
     margin: 40px auto;
     object-fit: contain;
+    animation: headingEntrance 1s ease-out both;
 }
 
 main>ul {
@@ -106,21 +130,19 @@ main>ul {
 }
 
 main>ul>li {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 22px 25px;
-    margin-bottom: 18px;
     display: flex;
     align-items: center;
     gap: 20px;
+    padding: 22px 25px;
+    margin-bottom: 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
     color: var(--text);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-main>ul>li:hover {
-    border-color: var(--primary);
-    box-shadow: 0 4px 12px rgba(36, 72, 63, 0.07);
+main>ul>li strong {
+    color: var(--primary);
 }
 
 main>ul>li img {
@@ -128,10 +150,11 @@ main>ul>li img {
     height: 75px;
     object-fit: contain;
     flex-shrink: 0;
+    transition: transform 0.35s ease;
 }
 
-main>ul>li strong {
-    color: var(--primary);
+main>ul>li:hover img {
+    transform: scale(1.08);
 }
 
 footer {
@@ -143,8 +166,8 @@ footer {
 }
 
 footer p {
-    font-size: 14px;
     color: #E0E7E2;
+    font-size: 14px;
 }
 
 a:focus-visible {
@@ -160,27 +183,39 @@ a:focus-visible {
 }
 
 .category-card {
+    padding: 30px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 6px;
-    padding: 30px;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    animation: pageEntrance 0.6s ease-out both;
 }
 
-.category-card:hover {
-    border-color: var(--primary);
-    box-shadow: 0 5px 15px rgba(36, 72, 63, 0.07);
+.category-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.category-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.category-card:nth-child(4) {
+    animation-delay: 0.3s;
 }
 
 .category-card h2 {
     color: var(--primary);
     font-size: 1.35rem;
     margin-bottom: 12px;
+    transition: color 0.3s ease;
 }
 
 .category-card p {
     color: var(--muted);
     font-size: 0.98rem;
+}
+
+.category-card:hover h2 {
+    color: var(--accent);
 }
 
 .projects-page {
@@ -209,9 +244,9 @@ a:focus-visible {
 }
 
 .projects-intro p {
+    max-width: 680px;
     color: var(--muted);
     font-size: 1.08rem;
-    max-width: 680px;
 }
 
 .projects-heading {
@@ -248,7 +283,6 @@ a:focus-visible {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 24px;
     list-style: none;
-    margin-top: 0;
 }
 
 .projects-grid>.project-card {
@@ -256,18 +290,33 @@ a:focus-visible {
     flex-direction: column;
     align-items: stretch;
     gap: 0;
+    padding: 0;
+    margin: 0;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 6px;
-    padding: 0;
-    margin: 0;
     overflow: hidden;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    animation: pageEntrance 0.6s ease-out both;
 }
 
-.projects-grid>.project-card:hover {
-    border-color: var(--primary);
-    box-shadow: 0 5px 15px rgba(36, 72, 63, 0.07);
+.projects-grid>.project-card:nth-child(2) {
+    animation-delay: 0.08s;
+}
+
+.projects-grid>.project-card:nth-child(3) {
+    animation-delay: 0.16s;
+}
+
+.projects-grid>.project-card:nth-child(4) {
+    animation-delay: 0.24s;
+}
+
+.projects-grid>.project-card:nth-child(5) {
+    animation-delay: 0.32s;
+}
+
+.projects-grid>.project-card:nth-child(6) {
+    animation-delay: 0.4s;
 }
 
 .project-card-top {
@@ -283,10 +332,10 @@ a:focus-visible {
 }
 
 .project-card-content {
-    padding: 24px;
     display: flex;
     flex-direction: column;
     flex: 1;
+    padding: 24px;
 }
 
 .project-card-content h3 {
@@ -294,6 +343,7 @@ a:focus-visible {
     font-size: 1.18rem;
     line-height: 1.4;
     margin-bottom: 12px;
+    transition: color 0.3s ease;
 }
 
 .project-description {
@@ -304,12 +354,12 @@ a:focus-visible {
 }
 
 .project-details {
-    border-top: 1px solid var(--border);
-    padding-top: 18px;
-    margin-top: auto;
     display: flex;
     flex-direction: column;
     gap: 15px;
+    border-top: 1px solid var(--border);
+    padding-top: 18px;
+    margin-top: auto;
 }
 
 .project-detail {
@@ -331,6 +381,10 @@ a:focus-visible {
     font-weight: 600;
 }
 
+.projects-grid>.project-card:hover h3 {
+    color: var(--accent);
+}
+
 .empty-projects {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -346,6 +400,62 @@ a:focus-visible {
 
 .empty-projects p {
     color: var(--muted);
+}
+
+main>ul>li,
+.category-card,
+.projects-grid>.project-card {
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+main>ul>li:hover,
+.category-card:hover,
+.projects-grid>.project-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--primary);
+    box-shadow: 0 12px 25px rgba(36, 72, 63, 0.12);
+}
+
+button,
+.button {
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+button:hover,
+.button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(36, 72, 63, 0.15);
+}
+
+@keyframes pageEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes headingEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @media (max-width: 900px) {
@@ -369,6 +479,10 @@ a:focus-visible {
     nav a {
         padding: 8px 0;
         font-size: 14px;
+    }
+
+    nav a::after {
+        bottom: 2px;
     }
 
     main {
@@ -460,9 +574,9 @@ a:focus-visible {
     *,
     *::before,
     *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+        animation: none !important;
+        transition: none !important;
         scroll-behavior: auto !important;
+        transform: none !important;
     }
 }
