@@ -1,13 +1,72 @@
 <%- include('partials/header') %>
-    <main>
-        <h1>
-            <%= title %>
-        </h1>
-        <p>Coming Soon!</p><h2>Upcoming Service Projects</h2>
-        <ul>
-            <li>Park Cleanup - Join us to clean up local parks and make them beautiful!</li>
-            <li>Food Drive - Help collect and distribute food to those in need.</li>
-            <li>Community Tutoring - Volunteer to tutor students in various subjects.</li>
-        </ul>
-    </main>
+
+<main class="projects-page">
+    <section class="projects-intro">
+        <span class="section-label">MAKE A DIFFERENCE</span>
+        <h1><%= title %></h1>
+        <p>
+            Discover meaningful opportunities to serve your community.
+            Connect with local organizations and become part of something
+            that makes a lasting difference.
+        </p>
+    </section>
+
+    <section class="projects-section">
+        <div class="projects-heading">
+            <div>
+                <h2>Explore Service Projects</h2>
+                <p>Find an opportunity that inspires you to get involved.</p>
+            </div>
+
+            <span class="project-count">
+                <%= projects.length %> Projects Available
+            </span>
+        </div>
+
+        <% if (projects.length > 0) { %>
+            <ul class="projects-grid">
+                <% projects.forEach(project => { %>
+                    <li class="project-card">
+                        <div class="project-card-top">
+                            <span class="project-date">
+                                <%= new Date(project.project_date).toLocaleDateString('en-GB', {
+                                    day: '2-digit',
+                                    month: 'short',
+                                    year: 'numeric',
+                                    timeZone: 'UTC'
+                                }) %>
+                            </span>
+                        </div>
+
+                        <div class="project-card-content">
+                            <h3><%= project.title %></h3>
+
+                            <p class="project-description">
+                                <%= project.description %>
+                            </p>
+
+                            <div class="project-details">
+                                <div class="project-detail">
+                                    <span class="detail-label">ORGANIZATION</span>
+                                    <strong><%= project.organization_name %></strong>
+                                </div>
+
+                                <div class="project-detail">
+                                    <span class="detail-label">LOCATION</span>
+                                    <strong><%= project.location %></strong>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <div class="empty-projects">
+                <h3>No Projects Available Yet</h3>
+                <p>Please check back later for new opportunities to serve.</p>
+            </div>
+        <% } %>
+    </section>
+</main>
+
 <%- include('partials/footer') %>
