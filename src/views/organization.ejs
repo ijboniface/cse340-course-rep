@@ -1,4 +1,4 @@
-﻿<%- include('partials/header') %>
+<%- include('partials/header') %>
 
 <main class="organization-page">
 
@@ -60,7 +60,11 @@
 
                         <div class="project-card-content">
 
-                            <h3><%= project.title %></h3>
+                            <h3>
+                                <a href="/project/<%= project.project_id %>">
+                                    <%= project.title %>
+                                </a>
+                            </h3>
 
                             <p class="project-description">
                                 <%= project.description %>
