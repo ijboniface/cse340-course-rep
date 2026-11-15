@@ -1,0 +1,114 @@
+﻿<%- include('partials/header') %>
+
+<main class="organization-page">
+
+    <section class="organization-intro">
+        <span class="section-label">OUR PARTNER</span>
+
+        <h1><%= organizationDetails.name %></h1>
+
+        <img
+            class="organization-logo"
+            src="/images/<%= organizationDetails.logo_filename %>"
+            alt="<%= organizationDetails.name %> logo"
+        >
+
+        <div class="organization-description">
+            <h2>About This Organization</h2>
+
+            <p><%= organizationDetails.description %></p>
+
+            <p>
+                <strong>Contact:</strong>
+                <a href="mailto:<%= organizationDetails.contact_email %>">
+                    <%= organizationDetails.contact_email %>
+                </a>
+            </p>
+        </div>
+    </section>
+
+    <section class="organization-projects">
+
+        <div class="projects-heading">
+            <div>
+                <h2>Projects by <%= organizationDetails.name %></h2>
+                <p>Explore the projects supported by this organization.</p>
+            </div>
+
+            <span class="project-count">
+                <%= projects.length %> Projects
+            </span>
+        </div>
+
+        <% if (projects.length > 0) { %>
+
+            <ul class="projects-grid">
+
+                <% projects.forEach(project => { %>
+
+                    <li class="project-card">
+
+                        <div class="project-card-top">
+                            <span class="project-date">
+                                <%= new Date(project.project_date).toLocaleDateString('en-GB', {
+                                    day: '2-digit',
+                                    month: 'long',
+                                    year: 'numeric'
+                                }) %>
+                            </span>
+                        </div>
+
+                        <div class="project-card-content">
+
+                            <h3><%= project.title %></h3>
+
+                            <p class="project-description">
+                                <%= project.description %>
+                            </p>
+
+                            <div class="project-details">
+
+                                <div class="project-detail">
+                                    <span class="detail-label">LOCATION</span>
+                                    <strong><%= project.location %></strong>
+                                </div>
+
+                                <div class="project-detail">
+                                    <span class="detail-label">PROJECT DATE</span>
+                                    <strong>
+                                        <%= new Date(project.project_date).toLocaleDateString('en-GB', {
+                                            day: '2-digit',
+                                            month: 'long',
+                                            year: 'numeric'
+                                        }) %>
+                                    </strong>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </li>
+
+                <% }); %>
+
+            </ul>
+
+        <% } else { %>
+
+            <div class="empty-projects">
+                <h3>No Projects Available</h3>
+                <p>This organization has no associated projects yet.</p>
+            </div>
+
+        <% } %>
+
+    </section>
+
+    <a class="organization-back-link" href="/organizations">
+        &larr; Back to All Organizations
+    </a>
+
+</main>
+
+<%- include('partials/footer') %>

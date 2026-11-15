@@ -580,3 +580,103 @@ button:hover,
         transform: none !important;
     }
 }
+
+.organization-intro {
+    max-width: 850px;
+    margin-bottom: 55px;
+}
+
+.organization-intro h1 {
+    color: var(--primary);
+    font-size: clamp(2rem, 4vw, 2.7rem);
+    margin-bottom: 25px;
+}
+
+.organization-logo {
+    display: block;
+    width: 180px;
+    height: 150px;
+    object-fit: contain;
+    margin: 25px 0;
+}
+
+.organization-description {
+    background: var(--surface);
+    padding: 28px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+}
+
+.organization-description h2 {
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.organization-description p {
+    color: var(--muted);
+    margin-bottom: 15px;
+}
+
+.organization-description p:last-child {
+    margin-bottom: 0;
+}
+
+.organization-description a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.organization-description a:hover {
+    text-decoration: underline;
+}
+
+.organization-projects {
+    margin-bottom: 40px;
+}
+
+.organization-projects .projects-heading {
+    margin-bottom: 28px;
+}
+
+.organization-projects .projects-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.organization-projects .project-card {
+    min-width: 0;
+}
+
+.organization-back-link {
+    display: inline-block;
+    color: var(--accent);
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 15px;
+    padding: 12px 18px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.organization-back-link:hover {
+    background: var(--accent-light);
+}
+
+@media (max-width: 600px) {
+    .organization-intro {
+        margin-bottom: 40px;
+    }
+
+    .organization-description {
+        padding: 20px;
+    }
+
+    .organization-logo {
+        width: 140px;
+        height: 120px;
+    }
+}
+
