@@ -1,54 +1,74 @@
-<%- include('partials/header') %>
+﻿<%- include('partials/header') %>
 
-    <main class="container">
-        <section class="project-details">
-            <h1>
-                <%= projectDetails.title %>
-            </h1>
+<main class="container">
+    <section class="project-details">
+        <h1><%= projectDetails.title %></h1>
 
-            <div class="project-information">
-                <p>
-                    <strong>Location:</strong>
-                    <%= projectDetails.location %>
-                </p>
-
-                <p>
-                    <strong>Project Date:</strong>
-                    <%= new Date(projectDetails.date).toLocaleDateString('en-GB', { day: 'numeric' , month: 'long' ,
-                        year: 'numeric' , timeZone: 'UTC' }) %>
-                </p>
-
-                <h2>Project Description</h2>
-                <p>
-                    <%= projectDetails.description %>
-                </p>
-            </div>
-
-            <section class="organization-information">
-                <h2>Organizing Organization</h2>
-
-                <h3>
-                    <a href="/organization/<%= projectDetails.organization_id %>">
-                        <%= projectDetails.organization_name %>
-                    </a>
-                </h3>
-
-                <p>
-                    <%= projectDetails.organization_description %>
-                </p>
-
-                <p>
-                    <strong>Contact Email:</strong>
-                    <a href="mailto:<%= projectDetails.contact_email %>">
-                        <%= projectDetails.contact_email %>
-                    </a>
-                </p>
-            </section>
+        <div class="project-information">
+            <p>
+                <strong>Location:</strong>
+                <%= projectDetails.location %>
+            </p>
 
             <p>
-                <a href="/projects">Back to Service Projects</a>
+                <strong>Project Date:</strong>
+                <%= new Date(projectDetails.date).toLocaleDateString(
+                    'en-GB',
+                    {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                        timeZone: 'UTC'
+                    }
+                ) %>
+            </p>
+
+            <h2>Project Description</h2>
+            <p><%= projectDetails.description %></p>
+        </div>
+
+        <section class="project-categories">
+            <h2>Categories</h2>
+
+            <% if (categories && categories.length > 0) { %>
+                <div class="category-tags">
+                    <% categories.forEach(category => { %>
+                        <a
+                            class="category-tag"
+                            href="/category/<%= category.category_id %>"
+                        >
+                            <%= category.category_name %>
+                        </a>
+                    <% }); %>
+                </div>
+            <% } else { %>
+                <p>No categories assigned to this project.</p>
+            <% } %>
+        </section>
+
+        <section class="organization-information">
+            <h2>Organizing Organization</h2>
+
+            <h3>
+                <a href="/organization/<%= projectDetails.organization_id %>">
+                    <%= projectDetails.organization_name %>
+                </a>
+            </h3>
+
+            <p><%= projectDetails.organization_description %></p>
+
+            <p>
+                <strong>Contact Email:</strong>
+                <a href="mailto:<%= projectDetails.contact_email %>">
+                    <%= projectDetails.contact_email %>
+                </a>
             </p>
         </section>
-    </main>
 
-    <%- include('partials/footer') %>
+        <p>
+            <a href="/projects">Back to Service Projects</a>
+        </p>
+    </section>
+</main>
+
+<%- include('partials/footer') %>

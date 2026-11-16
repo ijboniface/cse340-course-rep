@@ -1,0 +1,58 @@
+﻿<%- include('partials/header') %>
+
+<main class="categories-page">
+    <section class="categories-intro">
+        <h1><%= category.category_name %></h1>
+
+        <p>
+            Explore service projects in this category and find
+            an opportunity to make a difference in your community.
+        </p>
+    </section>
+
+    <section class="categories-container">
+        <h2>Projects in This Category</h2>
+
+        <% if (projects.length > 0) { %>
+            <% projects.forEach(project => { %>
+                <article class="category-card">
+                    <h3>
+                        <a href="/project/<%= project.project_id %>">
+                            <%= project.title %>
+                        </a>
+                    </h3>
+
+                    <p><%= project.description %></p>
+
+                    <p>
+                        <strong>Location:</strong>
+                        <%= project.location %>
+                    </p>
+
+                    <p>
+                        <strong>Project Date:</strong>
+                        <%= new Date(project.project_date).toLocaleDateString(
+                            'en-GB',
+                            {
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric',
+                                timeZone: 'UTC'
+                            }
+                        ) %>
+                    </p>
+                </article>
+            <% }); %>
+        <% } else { %>
+            <p>
+                No service projects are currently listed in this category.
+            </p>
+        <% } %>
+
+        <p>
+            <a href="/categories">Back to Categories</a>
+        </p>
+    </section>
+</main>
+
+<%- include('partials/footer') %>
