@@ -1,72 +1,84 @@
 <%- include('partials/header') %>
 
-<main class="projects-page">
-    <section class="projects-intro">
-        <span class="section-label">MAKE A DIFFERENCE</span>
-        <h1><%= title %></h1>
-        <p>
-            Discover meaningful opportunities to serve your community.
-            Connect with local organizations and become part of something
-            that makes a lasting difference.
-        </p>
-    </section>
+    <main class="projects-page">
+        <section class="projects-intro">
+            <span class="section-label">MAKE A DIFFERENCE</span>
 
-    <section class="projects-section">
-        <div class="projects-heading">
-            <div>
-                <h2>Explore Service Projects</h2>
-                <p>Find an opportunity that inspires you to get involved.</p>
+            <h1>
+                <%= title %>
+            </h1>
+
+            <p>
+                Discover meaningful opportunities to serve your community.
+                Connect with local organizations and become part of something
+                that makes a lasting difference.
+            </p>
+        </section>
+
+        <section class="projects-section">
+            <div class="projects-heading">
+                <div>
+                    <h2>Explore Service Projects</h2>
+                    <p>Find an opportunity that inspires you to get involved.</p>
+                </div>
+
+                <span class="project-count">
+                    <%= projects.length %> Projects Available
+                </span>
             </div>
 
-            <span class="project-count">
-                <%= projects.length %> Projects Available
-            </span>
-        </div>
+            <% if (projects.length> 0) { %>
+                <ul class="projects-grid">
+                    <% projects.forEach(project=> { %>
+                        <li class="project-card">
+                            <div class="project-card-top">
+                                <span class="project-date">
+                                    <%= new Date(project.date).toLocaleDateString('en-GB', { day: '2-digit' ,
+                                        month: 'short' , year: 'numeric' , timeZone: 'UTC' }) %>
+                                </span>
+                            </div>
 
-        <% if (projects.length > 0) { %>
-            <ul class="projects-grid">
-                <% projects.forEach(project => { %>
-                    <li class="project-card">
-                        <div class="project-card-top">
-                            <span class="project-date">
-                                <%= new Date(project.project_date).toLocaleDateString('en-GB', {
-                                    day: '2-digit',
-                                    month: 'short',
-                                    year: 'numeric',
-                                    timeZone: 'UTC'
-                                }) %>
-                            </span>
-                        </div>
+                            <div class="project-card-content">
+                                <h3>
+                                    <a href="/project/<%= project.project_id %>">
+                                        <%= project.title %>
+                                    </a>
+                                </h3>
 
-                        <div class="project-card-content">
-                            <h3><%= project.title %></h3>
+                                <p class="project-description">
+                                    <%= project.description %>
+                                </p>
 
-                            <p class="project-description">
-                                <%= project.description %>
-                            </p>
+                                <div class="project-details">
+                                    <div class="project-detail">
+                                        <span class="detail-label">ORGANIZATION</span>
 
-                            <div class="project-details">
-                                <div class="project-detail">
-                                    <span class="detail-label">ORGANIZATION</span>
-                                    <strong><%= project.organization_name %></strong>
-                                </div>
+                                        <strong>
+                                            <a href="/organization/<%= project.organization_id %>">
+                                                <%= project.organization_name %>
+                                            </a>
+                                        </strong>
+                                    </div>
 
-                                <div class="project-detail">
-                                    <span class="detail-label">LOCATION</span>
-                                    <strong><%= project.location %></strong>
+                                    <div class="project-detail">
+                                        <span class="detail-label">LOCATION</span>
+
+                                        <strong>
+                                            <%= project.location %>
+                                        </strong>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
-                <% }); %>
-            </ul>
-        <% } else { %>
-            <div class="empty-projects">
-                <h3>No Projects Available Yet</h3>
-                <p>Please check back later for new opportunities to serve.</p>
-            </div>
-        <% } %>
-    </section>
-</main>
+                        </li>
+                        <% }); %>
+                </ul>
+                <% } else { %>
+                    <div class="empty-projects">
+                        <h3>No Projects Available Yet</h3>
+                        <p>Please check back later for new opportunities to serve.</p>
+                    </div>
+                    <% } %>
+        </section>
+    </main>
 
-<%- include('partials/footer') %>
+    <%- include('partials/footer') %>
