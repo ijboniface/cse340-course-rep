@@ -1,4 +1,8 @@
+import 'dotenv/config';
+
 import express from 'express';
+import session from 'express-session';
+import flash from './src/middleware/flash.js';
 import ejs from 'ejs';
 
 import { fileURLToPath } from 'url';
@@ -8,6 +12,11 @@ import router from './src/routes.js';
 
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
 const PORT = Number(process.env.PORT) || 3000;
+const SESSION_SECRET = process.env.SESSION_SECRET;
+
+if (!SESSION_SECRET) {
+    throw new Error('SESSION_SECRET is missing from environment variables.');
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,26 +31,40 @@ app.set('views', path.join(__dirname, 'src/views'));
  * Configure Express middleware
  */
 
+// Set up session management
+app.use(session({
+    secret: SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60 * 60 * 1000 }
+}));
+
+// Use flash message middleware
+app.use(flash);
+
 // Middleware to log all incoming requests
 app.use((req, res, next) => {
     console.log(`${req.method} ${req.originalUrl}`);
     next();
 });
 
-// Middleware to make NODE_ENV available to all EJS views
+// Make NODE_ENV available to all EJS views
 app.use((req, res, next) => {
     res.locals.NODE_ENV = NODE_ENV;
     next();
 });
 
-// Serve static files from the public directory
+// Process POST form data
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
 /**
  * Application Routes
  */
 
-// Use the imported router to handle routes
 app.use(router);
 
 /**
@@ -57,22 +80,24 @@ app.use((req, res, next) => {
 
 // Global error handler
 app.use((err, req, res, next) => {
-    // Log error details for debugging
     console.error('Error occurred:', err.message);
     console.error('Stack trace:', err.stack);
 
-    // Determine status and template
     const status = err.status || 500;
     const template = status === 404 ? '404' : '500';
 
-    // Prepare data for the template
     const context = {
         title: status === 404 ? 'Page Not Found' : 'Server Error',
         error: err.message,
-        stack: err.stack
+        stack: err.stack,
+        flash: req.flash || (() => ({
+            success: [],
+            error: [],
+            warning: [],
+            info: []
+        }))
     };
 
-    // Render the appropriate error template
     res.status(status).render(`errors/${template}`, context);
 });
 

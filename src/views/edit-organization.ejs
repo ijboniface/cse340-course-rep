@@ -1,0 +1,73 @@
+<%- include('partials/header') %>
+
+    <main class="edit-organization-page">
+
+        <h1>
+            <%= title %>
+        </h1>
+
+        <% if (errors && errors.length> 0) { %>
+            <div class="error-messages" role="alert">
+                <h2>Please correct the following errors:</h2>
+                <ul>
+                    <% errors.forEach(error=> { %>
+                        <li>
+                            <%= error %>
+                        </li>
+                        <% }) %>
+                </ul>
+            </div>
+            <% } %>
+
+                <form action="/edit-organization/<%= organizationDetails.organization_id %>" method="POST"
+                    enctype="multipart/form-data">
+
+                    <div class="form-group">
+                        <label for="name">Organization Name</label>
+
+                        <input type="text" id="name" name="name" value="<%= organizationDetails.name %>" maxlength="150"
+                            required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+
+                        <textarea id="description" name="description" maxlength="500"
+                            required><%= organizationDetails.description %></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactEmail">Contact Email</label>
+
+                        <input type="email" id="contactEmail" name="contactEmail"
+                            value="<%= organizationDetails.contact_email %>" maxlength="255" required />
+                    </div>
+
+                    <div class="form-group logo-upload-group">
+                        <label>Current Organization Logo</label>
+
+                        <img class="current-organization-logo" src="/images/<%= organizationDetails.logo_filename %>"
+                            alt="<%= organizationDetails.name %> logo" />
+
+                        <p class="current-logo-filename">
+                            <%= organizationDetails.logo_filename %>
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="logo">Upload a New Logo (Optional)</label>
+
+                        <input type="file" id="logo" name="logo" accept="image/png, image/jpeg, image/webp" />
+
+                        <small>
+                            Accepted formats: PNG, JPG, and WEBP. Maximum size: 2 MB.
+                        </small>
+                    </div>
+
+                    <button type="submit">Update Organization</button>
+
+                </form>
+
+    </main>
+
+    <%- include('partials/footer') %>

@@ -680,3 +680,658 @@ button:hover,
     }
 }
 
+/* Flash messages */
+.alert {
+    padding: 12px 18px;
+    margin: 20px auto;
+    border-radius: 5px;
+    max-width: 900px;
+    font-weight: 600;
+}
+
+.alert p {
+    margin: 0;
+}
+
+.alert.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.alert.warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+.alert.info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+/* Organization form validation errors */
+.error-messages {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-left: 5px solid #dc3545;
+    padding: 18px 22px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.error-messages h2 {
+    color: #721c24;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.error-messages ul {
+    padding-left: 20px;
+}
+
+.error-messages li {
+    margin-bottom: 5px;
+}
+form[action="/new-organization"] {
+    max-width: 720px;
+    margin: 35px auto;
+    padding: 40px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(36, 72, 63, 0.08);
+    animation: pageEntrance 0.7s ease-out both;
+}
+
+main:has(form[action="/new-organization"])>h1 {
+    max-width: 720px;
+    margin: 0 auto;
+    color: var(--primary);
+    font-size: 2.2rem;
+}
+
+form[action="/new-organization"] .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-bottom: 25px;
+}
+
+form[action="/new-organization"] label {
+    color: var(--primary);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+form[action="/new-organization"] input[type="text"],
+form[action="/new-organization"] input[type="email"],
+form[action="/new-organization"] textarea {
+    width: 100%;
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--text);
+    background: #FAFBF9;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+form[action="/new-organization"] textarea {
+    min-height: 180px;
+    resize: vertical;
+    line-height: 1.7;
+}
+
+form[action="/new-organization"] input[type="text"]:focus,
+form[action="/new-organization"] input[type="email"]:focus,
+form[action="/new-organization"] textarea:focus {
+    background: var(--surface);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(36, 72, 63, 0.12);
+}
+
+form[action="/new-organization"] input::placeholder,
+form[action="/new-organization"] textarea::placeholder {
+    color: #929A94;
+}
+
+form[action="/new-organization"] input[type="file"] {
+    width: 100%;
+    padding: 16px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: var(--muted);
+    background: var(--surface-warm);
+    border: 1px dashed #AAB8AE;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+form[action="/new-organization"] input[type="file"]:hover {
+    background: var(--accent-light);
+    border-color: var(--accent);
+}
+
+form[action="/new-organization"] input[type="file"]::file-selector-button {
+    padding: 9px 15px;
+    margin-right: 12px;
+    color: var(--surface);
+    background: var(--primary);
+    border: none;
+    border-radius: 4px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form[action="/new-organization"] input[type="file"]::file-selector-button:hover {
+    background: var(--accent);
+}
+
+form[action="/new-organization"] button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 15px 22px;
+    margin-top: 10px;
+    color: var(--surface);
+    background: var(--primary);
+    border: none;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+form[action="/new-organization"] button[type="submit"]:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(36, 72, 63, 0.18);
+}
+
+form[action="/new-organization"] button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+form[action="/new-organization"] button[type="submit"]:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 4px;
+}
+
+.error-messages {
+    max-width: 720px;
+    margin: 25px auto;
+}
+
+.error-messages h2 {
+    margin-top: 0;
+}
+
+.error-messages ul {
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    form[action="/new-organization"] {
+        padding: 30px 25px;
+        margin: 30px auto;
+    }
+
+    main:has(form[action="/new-organization"])>h1 {
+        font-size: 1.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    nav ul {
+        gap: 12px 20px;
+    }
+
+    main {
+        width: 92%;
+        margin: 30px auto;
+    }
+
+    main>h1 {
+        font-size: 1.65rem;
+    }
+
+    main>ul>li {
+        align-items: flex-start;
+        padding: 15px;
+        gap: 12px;
+        font-size: 14px;
+    }
+
+    main>ul>li img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* Edit Organization Form */
+
+main.edit-organization-page {
+    width: 90%;
+    max-width: 750px;
+    margin: 45px auto;
+    padding: 35px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+    box-sizing: border-box;
+}
+
+.edit-organization-page h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    line-height: 1.2;
+    margin: 0 0 30px;
+}
+
+.edit-organization-page form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.edit-organization-page .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    width: 100%;
+}
+
+.edit-organization-page label {
+    color: var(--primary);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.edit-organization-page input[type="text"],
+.edit-organization-page input[type="email"],
+.edit-organization-page textarea {
+    width: 100%;
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--text);
+    background: #FAFBF9;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.edit-organization-page textarea {
+    min-height: 160px;
+    resize: vertical;
+    line-height: 1.7;
+}
+
+.edit-organization-page input:focus,
+.edit-organization-page textarea:focus {
+    background: var(--surface);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(36, 72, 63, 0.12);
+}
+
+/* Current Organization Logo */
+
+.edit-organization-page .logo-upload-group {
+    padding: 20px;
+    background: var(--surface-warm);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.edit-organization-page .current-organization-logo {
+    display: block;
+    width: 120px !important;
+    max-width: 100%;
+    height: 100px !important;
+    object-fit: contain;
+    padding: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.edit-organization-page .current-logo-filename {
+    margin: 8px 0 0;
+    color: var(--muted);
+    font-size: 0.85rem;
+    overflow-wrap: anywhere;
+}
+
+/* Upload New Logo */
+
+.edit-organization-page input[type="file"] {
+    width: 100%;
+    padding: 14px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: var(--muted);
+    background: var(--surface-warm);
+    border: 1px dashed #AAB8AE;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.edit-organization-page input[type="file"]::file-selector-button {
+    padding: 9px 15px;
+    margin-right: 12px;
+    color: var(--surface);
+    background: var(--primary);
+    border: none;
+    border-radius: 4px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.edit-organization-page input[type="file"]::file-selector-button:hover {
+    background: var(--accent);
+}
+
+.edit-organization-page small {
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+/* Validation Errors */
+
+.edit-organization-page .error-messages {
+    max-width: 100%;
+    margin: 0 0 20px;
+    padding: 18px 22px;
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-left: 5px solid #dc3545;
+    border-radius: 5px;
+}
+
+.edit-organization-page .error-messages h2 {
+    color: #721c24;
+    font-size: 1.1rem;
+    margin: 0 0 10px;
+}
+
+.edit-organization-page .error-messages ul {
+    padding-left: 20px;
+}
+
+.edit-organization-page .error-messages li {
+    margin-bottom: 5px;
+}
+
+/* Update Button */
+
+.edit-organization-page button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 15px 22px;
+    margin-top: 5px;
+    color: var(--surface);
+    background: var(--primary);
+    border: none;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.edit-organization-page button[type="submit"]:hover {
+    background: var(--accent-hover);
+}
+
+.edit-organization-page button[type="submit"]:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 4px;
+}
+
+/* Responsive Edit Form */
+
+@media (max-width: 768px) {
+    main.edit-organization-page {
+        width: 90%;
+        padding: 28px;
+        margin: 35px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    main.edit-organization-page {
+        width: 92%;
+        padding: 22px 18px;
+        margin: 25px auto;
+    }
+
+    .edit-organization-page h1 {
+        font-size: 1.65rem;
+    }
+
+    .edit-organization-page .current-organization-logo {
+        width: 110px !important;
+        height: 90px !important;
+    }
+}
+.container>.project-details {
+    display: block;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(36, 72, 63, 0.08);
+    border-top: 1px solid var(--border);
+    gap: 0;
+}
+
+.container>.project-details>h1 {
+    color: var(--primary);
+    font-size: clamp(2rem, 4vw, 2.7rem);
+    line-height: 1.2;
+    margin-bottom: 28px;
+}
+
+.project-information {
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--border);
+}
+
+.project-information>p {
+    color: var(--muted);
+    margin-bottom: 18px;
+}
+
+.project-information strong {
+    color: var(--primary);
+}
+
+.project-information h2,
+.project-categories h2,
+.organization-information h2 {
+    color: var(--primary);
+    font-size: 1.4rem;
+    margin: 25px 0 12px;
+}
+
+.project-information h2 {
+    margin-top: 30px;
+}
+
+.project-information>p:last-child {
+    margin-bottom: 0;
+}
+
+.project-categories {
+    padding: 10px 0 30px;
+    border-bottom: 1px solid var(--border);
+}
+
+.project-categories h2 {
+    margin-top: 20px;
+}
+
+.project-categories>p {
+    color: var(--muted);
+    margin-top: 12px;
+}
+
+.category-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.category-tag {
+    display: inline-block;
+    padding: 8px 16px;
+    color: var(--accent);
+    background: var(--accent-light);
+    border: 1px solid #E7D5CB;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.category-tag:hover {
+    color: var(--surface);
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.edit-categories-link {
+    margin-top: 20px;
+}
+
+.edit-categories-link a {
+    display: inline-block;
+    padding: 10px 18px;
+    color: var(--surface);
+    background: var(--primary);
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.edit-categories-link a:hover {
+    background: var(--accent-hover);
+}
+
+.organization-information {
+    padding: 15px 0 25px;
+    border-bottom: 1px solid var(--border);
+}
+
+.organization-information h2 {
+    margin-top: 20px;
+}
+
+.organization-information h3 {
+    margin: 15px 0;
+    font-size: 1.2rem;
+}
+
+.organization-information h3 a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.organization-information h3 a:hover {
+    color: var(--accent);
+}
+
+.organization-information p {
+    color: var(--muted);
+    margin-bottom: 15px;
+}
+
+.organization-information p:last-child {
+    margin-bottom: 0;
+}
+
+.organization-information p a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.organization-information p a:hover {
+    text-decoration: underline;
+}
+
+.container>.project-details>p:last-child {
+    margin-top: 25px;
+}
+
+.container>.project-details>p:last-child a {
+    color: var(--accent);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.container>.project-details>p:last-child a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .container>.project-details {
+        padding: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container>.project-details {
+        padding: 22px 18px;
+    }
+
+    .container>.project-details>h1 {
+        font-size: 1.8rem;
+    }
+
+    .project-information h2,
+    .project-categories h2,
+    .organization-information h2 {
+        font-size: 1.2rem;
+    }
+
+    .category-tags {
+        gap: 8px;
+    }
+}

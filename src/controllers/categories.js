@@ -2,8 +2,13 @@
 import {
     getAllCategories,
     getCategoryById,
-    getProjectsByCategoryId
+    getCategoriesByProjectId,
+    getProjectsByCategoryId,
+    updateCategoryAssignments
 } from '../models/categories.js';
+
+// Import project model function
+import { getProjectDetails } from '../models/projects.js';
 
 // Display all categories
 const showCategoriesPage = async (req, res, next) => {
@@ -41,8 +46,68 @@ const showCategoryDetailsPage = async (req, res, next) => {
     }
 };
 
+// Display the assign categories form
+const showAssignCategoriesForm = async (req, res, next) => {
+    try {
+        const projectId = req.params.projectId;
+
+        // Retrieve project details
+        const projectDetails = await getProjectDetails(projectId);
+
+        if (!projectDetails) {
+            return res.status(404).send('Project not found.');
+        }
+
+        // Retrieve all available categories
+        const categories = await getAllCategories();
+
+        // Retrieve categories already assigned to this project
+        const assignedCategories = await getCategoriesByProjectId(projectId);
+
+        const title = 'Assign Categories to Project';
+
+        res.render('assign-categories', {
+            title,
+            projectId,
+            projectDetails,
+            categories,
+            assignedCategories
+        });
+    } catch (err) {
+        next(err);
+    }
+};
+
+// Process category assignments
+const processAssignCategoriesForm = async (req, res, next) => {
+    try {
+        const projectId = req.params.projectId;
+
+        // Retrieve selected category IDs
+        const selectedCategoryIds = req.body.categoryIds || [];
+
+        // Ensure selected category IDs are always an array
+        const categoryIdsArray = Array.isArray(selectedCategoryIds)
+            ? selectedCategoryIds
+            : [selectedCategoryIds];
+
+        // Update category assignments
+        await updateCategoryAssignments(projectId, categoryIdsArray);
+
+        // Set success message
+        req.flash('success', 'Categories updated successfully.');
+
+        // Return to project details
+        return res.redirect(`/project/${projectId}`);
+    } catch (err) {
+        next(err);
+    }
+};
+
 // Export controller functions
 export {
     showCategoriesPage,
-    showCategoryDetailsPage
+    showCategoryDetailsPage,
+    showAssignCategoriesForm,
+    processAssignCategoriesForm
 };

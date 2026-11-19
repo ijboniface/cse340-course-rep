@@ -72,10 +72,43 @@ const getProjectsByCategoryId = async (categoryId) => {
     return result.rows;
 };
 
+// Assign a category to a project
+const assignCategoryToProject = async (projectId, categoryId) => {
+    const query = `
+        INSERT INTO public.project_category (
+            category_id,
+            project_id
+        )
+        VALUES ($1, $2);
+    `;
+
+    const queryParams = [categoryId, projectId];
+
+    await db.query(query, queryParams);
+};
+
+// Update all category assignments for a project
+const updateCategoryAssignments = async (projectId, categoryIds) => {
+
+    // Remove existing category assignments
+    const deleteQuery = `
+        DELETE FROM public.project_category
+        WHERE project_id = $1;
+    `;
+
+    await db.query(deleteQuery, [projectId]);
+
+    // Add the newly selected categories
+    for (const categoryId of categoryIds) {
+        await assignCategoryToProject(projectId, categoryId);
+    }
+};
+
 // Export model functions
 export {
     getAllCategories,
     getCategoryById,
     getCategoriesByProjectId,
-    getProjectsByCategoryId
+    getProjectsByCategoryId,
+    updateCategoryAssignments
 };

@@ -1,0 +1,61 @@
+<%- include('partials/header') %>
+
+    <main class="edit-organization-page assign-categories-page">
+
+        <h1>
+            <%= title %>
+        </h1>
+
+        <% if (projectDetails) { %>
+            <h2>
+                <%= projectDetails.title %>
+            </h2>
+            <% } %>
+
+                <form action="/assign-categories/<%= projectId %>" method="POST">
+
+                    <div class="form-group">
+                        <h3>Select Project Categories</h3>
+
+                        <% if (categories.length> 0) { %>
+
+                            <% categories.forEach(category=> { %>
+
+                                <div class="category-checkbox">
+
+                                    <input type="checkbox" id="category-<%= category.category_id %>" name="categoryIds"
+                                        value="<%= category.category_id %>" <%=assignedCategories.some( assigned=>
+                                    Number(assigned.category_id) ===
+                                    Number(category.category_id)
+                                    ) ? 'checked' : '' %>
+                                    />
+
+                                    <label for="category-<%= category.category_id %>">
+                                        <%= category.category_name %>
+                                    </label>
+
+                                </div>
+
+                                <% }); %>
+
+                                    <% } else { %>
+
+                                        <p>No categories are currently available.</p>
+
+                                        <% } %>
+
+                    </div>
+
+                    <button type="submit">Update Categories</button>
+
+                    <p>
+                        <a href="/project/<%= projectId %>">
+                            Cancel and Return to Project
+                        </a>
+                    </p>
+
+                </form>
+
+    </main>
+
+    <%- include('partials/footer') %>

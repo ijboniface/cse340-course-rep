@@ -1,5 +1,6 @@
 ﻿import db from './db.js';
 
+// Get all projects
 const getAllProjects = async () => {
     const query = `
         SELECT
@@ -21,6 +22,7 @@ const getAllProjects = async () => {
     return result.rows;
 };
 
+// Get projects by organization ID
 const getProjectsByOrganizationId = async (organizationId) => {
     const query = `
         SELECT
@@ -41,6 +43,7 @@ const getProjectsByOrganizationId = async (organizationId) => {
     return result.rows;
 };
 
+// Get upcoming projects
 const getUpcomingProjects = async (number_of_projects) => {
     const query = `
         SELECT
@@ -65,6 +68,7 @@ const getUpcomingProjects = async (number_of_projects) => {
     return result.rows;
 };
 
+// Get project details
 const getProjectDetails = async (id) => {
     const query = `
         SELECT
@@ -72,8 +76,8 @@ const getProjectDetails = async (id) => {
             p.organization_id,
             p.title,
             p.description,
-            p.project_date AS date,
             p.location,
+            p.project_date AS date,
             o.name AS organization_name,
             o.description AS organization_description,
             o.contact_email,
@@ -90,9 +94,55 @@ const getProjectDetails = async (id) => {
     return result.rows.length > 0 ? result.rows[0] : null;
 };
 
+// Create a new service project
+const createProject = async (
+    title,
+    description,
+    location,
+    date,
+    organizationId
+) => {
+    const query = `
+        INSERT INTO public.project (
+            title,
+            description,
+            location,
+            project_date,
+            organization_id
+        )
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING project_id;
+    `;
+
+    const queryParams = [
+        title,
+        description,
+        location,
+        date,
+        organizationId
+    ];
+
+    const result = await db.query(query, queryParams);
+
+    if (result.rows.length === 0) {
+        throw new Error('Failed to create project');
+    }
+
+    if (process.env.ENABLE_SQL_LOGGING === 'true') {
+        console.log(
+            'Created new project with ID:',
+            result.rows[0].project_id
+        );
+    }
+
+    return result.rows[0].project_id;
+};
+
+// Export project model functions
 export {
     getAllProjects,
     getProjectsByOrganizationId,
     getUpcomingProjects,
-    getProjectDetails
+    getProjectDetails,
+    createProject
 };
