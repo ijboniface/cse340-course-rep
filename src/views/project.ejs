@@ -2,9 +2,16 @@
 
     <main class="container">
         <section class="project-details">
+
             <h1>
                 <%= projectDetails.title %>
             </h1>
+
+            <p class="edit-project-link">
+                <a href="/edit-project/<%= projectDetails.project_id %>">
+                    Edit Project
+                </a>
+            </p>
 
             <div class="project-information">
                 <p>
@@ -14,11 +21,12 @@
 
                 <p>
                     <strong>Project Date:</strong>
-                    <%= new Date(projectDetails.date).toLocaleDateString( 'en-GB' , { day: 'numeric' , month: 'long' ,
-                        year: 'numeric' , timeZone: 'UTC' } ) %>
+                    <%= new Date(projectDetails.date).toLocaleDateString('en-GB', { day: 'numeric' , month: 'long' ,
+                        year: 'numeric' , timeZone: 'UTC' }) %>
                 </p>
 
                 <h2>Project Description</h2>
+
                 <p>
                     <%= projectDetails.description %>
                 </p>
@@ -70,6 +78,7 @@
             <p>
                 <a href="/projects">Back to Service Projects</a>
             </p>
+
         </section>
     </main>
 
