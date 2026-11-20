@@ -1,6 +1,5 @@
 import db from './db.js';
 
-// Retrieve all categories
 const getAllCategories = async () => {
     const query = `
         SELECT
@@ -15,7 +14,6 @@ const getAllCategories = async () => {
     return result.rows;
 };
 
-// Retrieve a single category by ID
 const getCategoryById = async (id) => {
     const query = `
         SELECT
@@ -31,7 +29,6 @@ const getCategoryById = async (id) => {
     return result.rows.length > 0 ? result.rows[0] : null;
 };
 
-// Retrieve all categories associated with a project
 const getCategoriesByProjectId = async (projectId) => {
     const query = `
         SELECT
@@ -50,7 +47,6 @@ const getCategoriesByProjectId = async (projectId) => {
     return result.rows;
 };
 
-// Retrieve all projects associated with a category
 const getProjectsByCategoryId = async (categoryId) => {
     const query = `
         SELECT
@@ -72,7 +68,33 @@ const getProjectsByCategoryId = async (categoryId) => {
     return result.rows;
 };
 
-// Assign a category to a project
+const createCategory = async (categoryName) => {
+    const query = `
+        INSERT INTO public.category (category_name)
+        VALUES ($1)
+        RETURNING category_id;
+    `;
+
+    const queryParams = [categoryName];
+    const result = await db.query(query, queryParams);
+
+    return result.rows[0].category_id;
+};
+
+const updateCategory = async (id, categoryName) => {
+    const query = `
+        UPDATE public.category
+        SET category_name = $1
+        WHERE category_id = $2
+        RETURNING category_id;
+    `;
+
+    const queryParams = [categoryName, id];
+    const result = await db.query(query, queryParams);
+
+    return result.rows.length > 0 ? result.rows[0].category_id : null;
+};
+
 const assignCategoryToProject = async (projectId, categoryId) => {
     const query = `
         INSERT INTO public.project_category (
@@ -87,10 +109,7 @@ const assignCategoryToProject = async (projectId, categoryId) => {
     await db.query(query, queryParams);
 };
 
-// Update all category assignments for a project
 const updateCategoryAssignments = async (projectId, categoryIds) => {
-
-    // Remove existing category assignments
     const deleteQuery = `
         DELETE FROM public.project_category
         WHERE project_id = $1;
@@ -98,17 +117,17 @@ const updateCategoryAssignments = async (projectId, categoryIds) => {
 
     await db.query(deleteQuery, [projectId]);
 
-    // Add the newly selected categories
     for (const categoryId of categoryIds) {
         await assignCategoryToProject(projectId, categoryId);
     }
 };
 
-// Export model functions
 export {
     getAllCategories,
     getCategoryById,
     getCategoriesByProjectId,
     getProjectsByCategoryId,
+    createCategory,
+    updateCategory,
     updateCategoryAssignments
 };

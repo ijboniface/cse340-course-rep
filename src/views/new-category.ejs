@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+
+    <main class="category-form-page">
+        <h1>
+            <%= title %>
+        </h1>
+
+        <p>Enter a name for the new service project category.</p>
+
+        <% if (errors && errors.length> 0) { %>
+            <div class="form-errors">
+                <ul>
+                    <% errors.forEach(error=> { %>
+                        <li>
+                            <%= error.msg %>
+                        </li>
+                        <% }); %>
+                </ul>
+            </div>
+            <% } %>
+
+                <form action="/new-category" method="POST">
+                    <div class="form-group">
+                        <label for="category_name">Category Name</label>
+
+                        <input type="text" id="category_name" name="category_name" value="<%= category_name %>" required
+                            maxlength="100">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit">Create Category</button>
+                        <a href="/categories">Cancel</a>
+                    </div>
+                </form>
+    </main>
+
+    <%- include('partials/footer') %>
