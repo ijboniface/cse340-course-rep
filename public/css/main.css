@@ -1921,3 +1921,71 @@ main.edit-organization-page {
                                   height: 145px;
                               }
                           }
+
+/* =========================================
+   PROJECT PAGE VISUAL CONSISTENCY
+   Matches the Categories page design
+========================================= */
+
+.projects-page .section-label {
+    color: var(--primary);
+}
+
+.projects-page .project-count {
+    color: var(--primary);
+    background: var(--surface);
+    border: 1px solid var(--border);
+}
+
+.projects-page .add-project-link {
+    margin-bottom: 25px;
+}
+
+.projects-page .add-project-link a {
+    display: inline-block;
+    padding: 13px 24px;
+    color: var(--surface);
+    background: var(--primary);
+    border: 1px solid var(--primary);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.projects-page .add-project-link a:hover {
+    color: var(--surface);
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(36, 72, 63, 0.15);
+}
+
+.projects-page .project-card-top {
+    background: var(--surface);
+}
+
+.projects-page .project-date {
+    color: var(--primary);
+}
+
+.projects-page .project-card-content h3 a,
+.projects-page .project-detail strong a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.projects-page .project-card-content h3 a:hover,
+.projects-page .project-detail strong a:hover {
+    color: var(--accent);
+}
+
+.projects-page .projects-grid > .project-card:hover h3 {
+    color: var(--primary);
+}
+
+.projects-page .projects-grid > .project-card:hover h3 a {
+    color: var(--accent);
+}
