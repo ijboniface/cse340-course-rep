@@ -1,4 +1,5 @@
-import express from 'express';
+﻿import express from 'express';
+import upload from './middleware/upload.js';
 
 import { showHomePage } from './controllers/index.js';
 
@@ -44,12 +45,14 @@ router.get('/organization/:id', showOrganizationDetailsPage);
 router.get('/new-organization', showNewOrganizationForm);
 router.post(
     '/new-organization',
+    upload.single('logo'),
     organizationValidation,
     processNewOrganizationForm
 );
 router.get('/edit-organization/:id', showEditOrganizationForm);
 router.post(
     '/edit-organization/:id',
+    upload.single('logo'),
     organizationValidation,
     processEditOrganizationForm
 );
