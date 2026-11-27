@@ -1,4 +1,4 @@
-import 'dotenv/config';
+﻿import 'dotenv/config';
 import { Pool } from 'pg';
 
 /**
@@ -91,4 +91,4 @@ const testConnection = async () => {
     }
 };
 
-export { db as default, testConnection };
+export { pool, db as default, testConnection };

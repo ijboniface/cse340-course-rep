@@ -1,7 +1,9 @@
-import 'dotenv/config';
+﻿import 'dotenv/config';
 
 import express from 'express';
 import session from 'express-session';
+import connectPgSimple from 'connect-pg-simple';
+import { pool } from './src/models/db.js';
 import flash from './src/middleware/flash.js';
 import ejs from 'ejs';
 
@@ -31,12 +33,28 @@ app.set('views', path.join(__dirname, 'src/views'));
  * Configure Express middleware
  */
 
-// Set up session management
+// Set up PostgreSQL-backed session management
+const PgSession = connectPgSimple(session);
+
+if (NODE_ENV === 'production') {
+    app.set('trust proxy', 1);
+}
+
 app.use(session({
+    store: new PgSession({
+        pool,
+        tableName: 'user_sessions',
+        createTableIfMissing: true
+    }),
     secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 60 * 60 * 1000 }
+    cookie: {
+        maxAge: 60 * 60 * 1000,
+        httpOnly: true,
+        sameSite: 'lax',
+        secure: NODE_ENV === 'production'
+    }
 }));
 
 // Use flash message middleware
